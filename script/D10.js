@@ -249,14 +249,23 @@ const onlyTheYears = function () {
 /* ESERCIZIO 15
   Scrivi una funzione chiamata "onlyInLastMillennium" che ritorna solamente i film prodotto nel millennio scorso contenuti nell'array "movies" fornito.
 */
-
+const onlyInLastMillennium = function () {
+  return movies.filter((e) => Number(e.Year) < 1999 && Number(e.Year) > 1899)
+}
 /* ESERCIZIO 16
   Scrivi una funzione chiamata "sumAllTheYears" che ritorna la somma di tutti gli anni in cui sono stati prodotti i film contenuti nell'array "movies" fornito.
 */
-
+const sumAllTheYears = function () {
+  return movies.reduce((tot, n) => tot + Number(n.Year), 0)
+}
 /* ESERCIZIO 17
   Scrivi una funzione chiamata "searchByTitle" che riceve una stringa come parametro e ritorna i film nell'array "movies" fornito che la contengono nel titolo.
 */
+const searchByTitle = function (string) {
+  return movies.filter((movie) =>
+    movie.Title.toLowerCase().includes(string.toLowerCase())
+  )
+}
 
 /* ESERCIZIO 18
   Scrivi una funzione chiamata "searchAndDivide" che riceve una stringa come parametro e ritorna un oggetto contenente due array: "match" e "unmatch".
@@ -447,5 +456,7 @@ const movies = [
 console.log(newestMovie())
 console.log(countMovies())
 console.log(onlyTheYears())
-
+console.log(onlyInLastMillennium())
+console.log(sumAllTheYears())
+console.log(searchByTitle("avenger"))
 console.log(movies)
