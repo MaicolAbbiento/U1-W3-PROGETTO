@@ -285,37 +285,65 @@ const searchAndDivide = function (string) {
 /* ESERCIZIO 19
   Scrivi una funzione chiamata "removeIndex" che riceve un numero come parametro e ritorna l'array "movies" fornito privo dell'elemento nella posizione ricevuta come parametro.
 */
+function removeIndex(str) {
+  const newMovies = [...movies]
+  newMovies.splice(str, 1)
+  return newMovies
+}
 
 // DOM (nota: gli elementi che selezionerai non si trovano realmente nella pagina)
 
 /* ESERCIZIO 20
   Scrivi una funzione per selezionare l'elemento dotato di id "container" all'interno della pagina.
 */
-
+let container = document.getElementById("container")
 /* ESERCIZIO 21
   Scrivi una funzione per selezionare ogni tag <td> all'interno della pagina.
 */
+
+let td = document.querySelectorAll("td") // o document.getElementsByTagName("td")
 
 /* ESERCIZIO 22
   Scrivi una funzione che, tramite un ciclo, stampa in console il testo contenuto in ogni tag <td> all'interno della pagina.
 */
 
+const print = function () {
+  td.forEach((e) => e.textContent)
+}
+console.log(print())
 /* ESERCIZIO 23
   Scrivi una funzione per aggiungere un background di colore rosso a ogni link all'interno della pagina.
 */
-
+const background = function () {
+  let newBackgraund = document.querySelectorAll("a")
+  newBackgraund.forEach((colore) => (colore.style.backgroundColor = "red"))
+}
 /* ESERCIZIO 24
   Scrivi una funzione per aggiungere un nuovo elemento alla lista non ordinata con id "myList".
 */
-
+const addText = function () {
+  let newElement = document.getElementById("myList")
+  let element = document.createElement("li")
+  newElement.appendChild(element)
+}
 /* ESERCIZIO 25
   Scrivi una funzione per svuotare la lista non ordinata con id "myList".
 */
+const empntyList = function () {
+  let list = document.getElementById("myList")
+  while (list.firstChild) {
+    list.removeChild(list.firstChild)
+  }
+}
 
 /* ESERCIZIO 26
   Scrivi una funzione per aggiungere ad ogni tag <tr> la classe CSS "test"
 */
-
+const adClass = function () {
+  let classe = document.getElementsByClassName("test")
+  let arr = Array.from(classe)
+  arr.forEach((arrE) => arrE.classList.add("test"))
+}
 // [EXTRA] JS Avanzato
 
 /* ESERCIZIO 27
@@ -329,6 +357,21 @@ const searchAndDivide = function (string) {
   ***
 
 */
+const halfTree = function (n) {
+  // let tree = document.querySelector("p")
+  // let sr = ""
+  for (let i = 0; i < n; i++) {
+    let row = ""
+
+    for (let y = 0; y <= i; y++) {
+      row += "*"
+    }
+    console.log(row)
+    // sr = row + "<br>"
+  }
+  // tree.innerHTML = sr
+}
+halfTree(5) // verifica codice funzionante commenteta il codice funziona
 
 /* ESERCIZIO 28
   Crea una funzione chiamata "tree" che riceve un numero come parametro e costruisce un albero di "*" (asterischi) dell'altezza fornita.
@@ -345,6 +388,22 @@ const searchAndDivide = function (string) {
 /* ESERCIZIO 29
   Crea una funzione chiamata "isItPrime" che riceve un numero come parametro e ritorna true se il numero fornito è un numero primo.
 */
+
+function isItPrime(number) {
+  if (number <= 1) {
+    return false
+  } else {
+    for (let i = 2; i <= number / 2; i++) {
+      if (number % i === 0) {
+        return false
+      }
+    }
+  }
+  return true
+}
+
+console.log(isItPrime(3))
+// il numero primo deve essere maggiorre di uno poiche 1 non è primo e nemmeno i numeri negativi
 
 /* Questo array viene usato per gli esercizi. Non modificarlo. */
 
@@ -470,4 +529,5 @@ console.log(onlyInLastMillennium())
 console.log(sumAllTheYears())
 console.log(searchByTitle("avenger"))
 console.log(searchAndDivide("avenger"))
+console.log(removeIndex(2))
 console.log(movies)
