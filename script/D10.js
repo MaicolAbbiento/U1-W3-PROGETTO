@@ -271,6 +271,16 @@ const searchByTitle = function (string) {
   Scrivi una funzione chiamata "searchAndDivide" che riceve una stringa come parametro e ritorna un oggetto contenente due array: "match" e "unmatch".
   "match" deve includere tutti i film dell'array "movies" fornito che contengono la stringa fornita all'interno del proprio titolo, mentre "unmatch" deve includere tutti i rimanenti.
 */
+const searchAndDivide = function (string) {
+  let match = movies.filter((movie) =>
+    movie.Title.toLowerCase().includes(string.toLowerCase())
+  )
+  let unmatch = movies.filter(
+    (movie) => !movie.Title.toLowerCase().includes(string.toLowerCase())
+  )
+
+  return match, unmatch
+}
 
 /* ESERCIZIO 19
   Scrivi una funzione chiamata "removeIndex" che riceve un numero come parametro e ritorna l'array "movies" fornito privo dell'elemento nella posizione ricevuta come parametro.
@@ -459,4 +469,5 @@ console.log(onlyTheYears())
 console.log(onlyInLastMillennium())
 console.log(sumAllTheYears())
 console.log(searchByTitle("avenger"))
+console.log(searchAndDivide("avenger"))
 console.log(movies)
