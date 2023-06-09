@@ -112,24 +112,31 @@ console.log(onlyLetters('I have 45 dogs"'))
   Crea una funzione chiamata "isThisAnEmail" che riceve una stringa come parametro e ritorna true se la stringa è un valido indirizzo email.
 */
 function isThisAnEmail(str) {
-  let atIndex = str.indexOf("@")
-  let dotIndex = str.lastIndexOf(".")
-  console.log(dotIndex)
-  console.log(atIndex)
+  let posizioneChiocciola = str.indexOf("@")
+  let pointPosition = str.lastIndexOf(".")
 
-  if (atIndex < 1 || dotIndex < atIndex + 2 || dotIndex + 2 >= str.length) {
+  if (
+    posizioneChiocciola < 1 ||
+    pointPosition < posizioneChiocciola + 2 ||
+    pointPosition > str.length - 3
+  ) {
     return false
   }
 
   return true
 }
 
-console.log(isThisAnEmail("maicolabbientoce@gmail.cm"))
+console.log(isThisAnEmail("maicolabbientoce@gmail.com"))
 
 /* ESERCIZIO 7
   Scrivi una funzione chiamata "whatDayIsIt" che ritorna il giorno della settimana corrente.
 */
+const whatDayIsIt = function () {
+  let today = new Date()
+  return today.getDay()
+}
 
+console.log(whatDayIsIt())
 /* ESERCIZIO 8
   Scrivi una funzione chiamata "rollTheDices" che riceve un numero come parametro.
   Deve invocare la precedente funzione dice() il numero di volte specificato nel parametro, e deve tornare un oggetto contenente una proprietà "sum":
@@ -142,15 +149,52 @@ console.log(isThisAnEmail("maicolabbientoce@gmail.cm"))
       values: [3, 3, 4]
   }
 */
+const rollTheDices = function (n) {
+  let result = {
+    sum: 0,
+    values: [],
+  }
 
+  for (let i = 0; i < n; i++) {
+    let roll = dice()
+    result.sum += roll
+    result.values.push(roll)
+  }
+
+  return result
+}
+
+console.log(rollTheDices(3))
 /* ESERCIZIO 9
   Scrivi una funzione chiamata "howManyDays" che riceve una data come parametro e ritorna il numero di giorni trascorsi da tale data.
 */
 
+const howManyDays = function (date) {
+  const today = new Date().getTime()
+  const dataUtente = new Date(date).getTime()
+  const millisecondsDifference = today - dataUtente
+  let dayDifference = Math.floor(millisecondsDifference / (1000 * 60 * 60 * 24))
+  return dayDifference
+}
+console.log(howManyDays("2023-06-09"))
 /* ESERCIZIO 10
   Scrivi una funzione chiamata "isTodayMyBirthday" che deve ritornare true se oggi è il tuo compleanno, falso negli altri casi.
 */
+let isTodayMyBirthday = function (MyBirthday) {
+  let date = new Date()
+  let day = date.getDate()
+  let month = date.getMonth() + 1
 
+  let birthdayDate = new Date(MyBirthday)
+  let birthdayDay = birthdayDate.getDate()
+  let birthdayMonth = birthdayDate.getMonth() + 1
+  if (birthdayDay === day && birthdayMonth === month) {
+    return true
+  } else {
+    return false
+  }
+}
+console.log(isTodayMyBirthday("19-05-2001"))
 // Arrays & Oggetti
 
 // NOTA: l'array "movies" usato in alcuni esercizi è definito alla fine di questo file
@@ -159,19 +203,49 @@ console.log(isThisAnEmail("maicolabbientoce@gmail.cm"))
   Scrivi una funzione chiamata "deleteProp" che riceve un oggetto e una stringa come parametri; deve ritornare l'oggetto fornito dopo aver eliminato
   in esso la proprietà chiamata come la stringa passata come secondo parametro.
 */
+function deleteProp(objet, string) {
+  delete objet[string]
+  return objet
+}
+
+let updatedPerson = deleteProp(
+  (person = {
+    name: "John",
+    age: 30,
+    occupation: "Engineer",
+  }),
+  "name"
+)
+console.log(updatedPerson)
 
 /* ESERCIZIO 12
   Scrivi una funzione chiamata "newestMovie" che trova il film più recente nell'array "movies" fornito.
 */
+const newestMovie = function () {
+  let newestfilm = movies[0]
+  movies.forEach((e) => {
+    if (Number(e.Year) > Number(newestfilm.Year)) {
+      newestfilm = e
+    }
+  })
+  return newestfilm
+}
 
 /* ESERCIZIO 13
   Scrivi una funzione chiamata countMovies che ritorna il numero di film contenuti nell'array "movies" fornito.
 */
+const countMovies = function () {
+  return movies.length
+}
 
 /* ESERCIZIO 14
   Scrivi una funzione chiamata "onlyTheYears" che crea un array con solamente gli anni di uscita dei film contenuti nell'array "movies" fornito.
 */
-
+const onlyTheYears = function () {
+  let onlyYears = []
+  movies.forEach((e) => onlyYears.push(e.Year))
+  return onlyYears
+}
 /* ESERCIZIO 15
   Scrivi una funzione chiamata "onlyInLastMillennium" che ritorna solamente i film prodotto nel millennio scorso contenuti nell'array "movies" fornito.
 */
@@ -370,3 +444,8 @@ const movies = [
       "https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_SX300.jpg",
   },
 ]
+console.log(newestMovie())
+console.log(countMovies())
+console.log(onlyTheYears())
+
+console.log(movies)
